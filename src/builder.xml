@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk+" version="3.0"/>
+
+  <!-- Window definition -->
+  <object class="GtkWindow" id="window">
+    <property name="title">Todo App</property>
+    <property name="default-width">1800</property>
+    <property name="default-height">800</property>
+
+    <!-- Main vertical container -->
+    <child>
+      <object class="GtkBox" id="main_box">
+        <property name="orientation">horizontal</property>
+        <property name="spacing">10</property>
+
+        <!-- Top Box (Contains Button and Input Field) -->
+        <child>
+          <object class="GtkFrame" id="top_frame">
+            <child>
+              <object class="GtkBox" id="top_box">
+                <property name="orientation">vertical</property>
+                <property name="spacing">10</property>
+                
+                <child>
+                  <object class="GtkEntry" id="todo_entry">
+                    <property name="placeholder-text">Enter a new todo...</property>
+                  </object>
+                </child>
+                
+                <child>
+                  <object class="GtkButton" id="add_todo_button">
+                    <property name="label">Add Todo</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">TRUE</property>
+          </packing>
+        </child>
+
+        <!-- Middle Box (Placeholder for Todo Items) -->
+        <child>
+          <object class="GtkFrame" id="middle_frame">
+            <child>
+              <object class="GtkBox" id="middle_box">
+                <property name="orientation">vertical</property>
+                <property name="spacing">10</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">TRUE</property>
+          </packing>
+        </child>
+
+        <!-- Bottom Box (For Future Use) -->
+        <child>
+          <object class="GtkFrame" id="bottom_frame">
+            <child>
+              <object class="GtkBox" id="bottom_box">
+                <property name="orientation">vertical</property>
+                <property name="spacing">10</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">TRUE</property>
+          </packing>
+        </child>
+
+      </object>
+    </child>
+  </object>
+</interface>
