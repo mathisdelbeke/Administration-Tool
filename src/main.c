@@ -54,18 +54,26 @@ void option_add_front() {
 
 void option_print() {
 	print_list();
-}	
+}
+
+void option_delete() {
+	printf("Enter a todo, max %d chars: ", MAX_CHARS);
+	char todo[MAX_CHARS + 2];
+	read_input(todo);
+	if (is_input_correct(todo)) delete_node(todo);
+}
 
 int main() {
 	init_sigint();
 	while(true) {
 		char selected_option;
-		printf("1. Add to back   2. Add to front   3. print: ");
+		printf("1. Add to back   2. Add to front   3. print   4. delete:");
 		selected_option = getchar();
 		while (getchar() != '\n');
 		if (selected_option == '1') option_add_back();
 		else if (selected_option == '2') option_add_front();
 		else if (selected_option == '3') option_print();
+		else if (selected_option == '4') option_delete();
 	}
 	return 0;
 }

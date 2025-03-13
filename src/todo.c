@@ -51,6 +51,28 @@ void add_front_list(char *checked_todo) {
     head = newNode;
 }
 
+void delete_node(char *todo) {
+    TodoNode *temp = head;
+    TodoNode *prev = NULL;
+
+    if (temp != NULL && strcmp(temp->todo, todo) == 0) {
+        head = temp->nextNode;
+        free(temp->todo);
+        free(temp);
+        return;
+    }
+
+    while (temp != NULL && strcmp(temp->todo, todo) != 0) {
+        prev = temp;
+        temp = temp->nextNode;
+    }
+    if (temp == NULL) return;
+
+    prev->nextNode = temp->nextNode;
+    free(temp->todo);
+    free(temp);    
+}
+
 void print_list() {
     TodoNode *temp = head;
     while (temp != NULL) {

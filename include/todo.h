@@ -11,6 +11,7 @@ void handle_sigint(int sig);
 
 void add_back_list(char *checked_todo);
 void add_front_list(char *checked_todo);
+void delete_node(char *todo);
 void print_list();
 void free_list();
 
