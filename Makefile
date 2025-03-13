@@ -1,6 +1,5 @@
 CC = gcc
-CFLAGS := -Wall -I./include $(shell pkg-config --cflags gtk+-3.0)
-LDFLAGS := $(shell pkg-config --libs gtk+-3.0)
+CFLAGS := -Wall -I./include
 
 TARGET = Administration-tool
 
@@ -10,12 +9,12 @@ OBJS = $(SRCS:src/%.c=build/%.o)
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
-	$(CC) -o $(TARGET) $(OBJS) $(LDFLAGS)
+	$(CC) -o $(TARGET) $(OBJS)
 
 build/%.o: src/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -rf build TARGET
+	rm -rf build $(TARGET)
 	mkdir build
 
