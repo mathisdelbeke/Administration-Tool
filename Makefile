@@ -3,7 +3,7 @@ CFLAGS := -Wall -I./include
 
 TARGET = Administration-tool
 
-SRCS = src/main.c src/todo.c
+SRCS = src/main.c src/todo_sll.c src/todo_dll.c
 OBJS = $(SRCS:src/%.c=build/%.o)
 
 all: $(TARGET)

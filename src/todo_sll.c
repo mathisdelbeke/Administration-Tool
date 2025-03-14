@@ -1,25 +1,13 @@
 #include <stdio.h>
 #include <string.h>
-#include <stdbool.h>
-#include <signal.h>
 #include <stdlib.h>
-#include "todo.h"
+#include "todo_sll.h"
 
-TodoNode *head;
+TodoSllNode *sll_head;
 
-void init_sigint() {
-    signal(SIGINT, handle_sigint);
-}
-
-void handle_sigint(int sig) {
-    printf("\nCaught signal %d (Ctrl + c), cleaning up...\n", sig);
-    free_list();
-    exit(0);
-}
-
-void add_back_list(char *checked_todo) {
+void add_back_sll(char *checked_todo) {
     char *todo = strdup(checked_todo);
-    TodoNode *newNode = (TodoNode *)malloc(sizeof(TodoNode));
+    TodoSllNode *newNode = (TodoSllNode *)malloc(sizeof(TodoSllNode));
     if (newNode == NULL) {
         printf("Memory allocation todo failed\n");
         return;
@@ -27,36 +15,36 @@ void add_back_list(char *checked_todo) {
     newNode->todo = todo;
     newNode->nextNode = NULL;
 
-    if (head == NULL) {
-        head = newNode;
+    if (sll_head == NULL) {
+        sll_head = newNode;
         return;
     }
 
-    TodoNode *temp = head;
+    TodoSllNode *temp = sll_head;
     while (temp->nextNode != NULL) {
         temp = temp->nextNode;
     }
     temp->nextNode = newNode;
 }
 
-void add_front_list(char *checked_todo) {
+void add_front_sll(char *checked_todo) {
     char *todo = strdup(checked_todo);
-    TodoNode *newNode = (TodoNode *)malloc(sizeof(TodoNode));
+    TodoSllNode *newNode = (TodoSllNode *)malloc(sizeof(TodoSllNode));
     if (newNode == NULL) {
         printf("Memory allocation todo failed\n");
         return;
     }
     newNode->todo = todo;
-    newNode->nextNode = head;
-    head = newNode;
+    newNode->nextNode = sll_head;
+    sll_head = newNode;
 }
 
-void delete_node(char *todo) {
-    TodoNode *temp = head;
-    TodoNode *prev = NULL;
+void delete_node_sll(char *todo) {
+    TodoSllNode *temp = sll_head;
+    TodoSllNode *prev = NULL;
 
     if (temp != NULL && strcmp(temp->todo, todo) == 0) {
-        head = temp->nextNode;
+        sll_head = temp->nextNode;
         free(temp->todo);
         free(temp);
         return;
@@ -73,19 +61,21 @@ void delete_node(char *todo) {
     free(temp);    
 }
 
-void print_list() {
-    TodoNode *temp = head;
+void print_sll() {
+    printf("\n-------------------\n");
+    TodoSllNode *temp = sll_head;
     while (temp != NULL) {
         printf("%s\n", temp->todo);
         temp = temp->nextNode;
     }
+    printf("-------------------\n");
 }
 
-void free_list() {
-    TodoNode *temp;
-    while (head != NULL) {
-        temp = head;
-        head = head->nextNode;
+void free_sll() {
+    TodoSllNode *temp;
+    while (sll_head != NULL) {
+        temp = sll_head;
+        sll_head = sll_head->nextNode;
         free(temp->todo);
         free(temp);
     }
