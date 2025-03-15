@@ -77,10 +77,10 @@ void delete_node_dll(char *todo) {
 }
 
 void print_dll() {
-    printf("\n-------------------\n");
+    printf("-------------------\n");
     TodoDllNode *temp = dll_head;
     while (temp != NULL) {
-        printf("%s\n", temp->todo);
+        printf("%s", temp->todo);
         temp = temp->nextNode;
     }
     printf("-------------------\n");

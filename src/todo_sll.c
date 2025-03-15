@@ -62,10 +62,10 @@ void delete_node_sll(char *todo) {
 }
 
 void print_sll() {
-    printf("\n-------------------\n");
+    printf("-------------------\n");
     TodoSllNode *temp = sll_head;
     while (temp != NULL) {
-        printf("%s\n", temp->todo);
+        printf("%s", temp->todo);
         temp = temp->nextNode;
     }
     printf("-------------------\n");
