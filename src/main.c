@@ -7,6 +7,7 @@
 #include "todo_sll.h"
 #include "todo_dll.h"
 #include "ring_buffer.h"
+#include "queue.h"
 
 static const int MAX_CHARS = 250;
 
@@ -26,7 +27,7 @@ static void handle_sigint(int sig) {
 }
 
 static void show_menu() {
-	printf("1. Add ssl back\n2. Add ssl front\n3. Print ssl\n4. Delete ssl\n5. Add dll back\n6. Add dll front\n7. Print dll\n8. Delete dll\n+. Add to buffer\n-. Remove to buffer\n:. Print buffer\n\n");
+	printf("1. Add ssl back\n2. Add ssl front\n3. Print ssl\n4. Delete ssl\n5. Add dll back\n6. Add dll front\n7. Print dll\n8. Delete dll\n+. Add to buffer\n-. Remove to buffer\n:. Print buffer\ne. Enqueue\nd. Dequeue\n;. Print queue\n");
 	char selected_option = getchar();
 	if (selected_option == '\n') return;
 	while (getchar() != '\n');
@@ -41,6 +42,9 @@ static void show_menu() {
 	else if (selected_option == '+') add_value_buffer();
 	else if (selected_option == '-') remove_value_buffer();
 	else if (selected_option == ':') print_buffer();
+	else if (selected_option == 'e') enqueue_queue();
+	else if (selected_option == 'd') dequeue_queue();
+	else if (selected_option == ';') print_queue();
 }     
 
 static void add_todo(TypeLinkedlist type_linkedlist, InsertionPosition insert_position) {
@@ -82,6 +86,21 @@ static void remove_value_buffer() {
 		printf("Sensor value fetched: %d\n", reading);
 	else
 		printf("Nothing read\n");
+}
+
+static void enqueue_queue() {
+	int8_t value;
+	read_input_value(&value);
+	enqueue(value);
+}
+
+static void dequeue_queue() {
+	int8_t reading;
+	bool read_correct = dequeue(&reading); 
+	if (read_correct)
+		printf("Sensor value fetched: %d\n", reading);
+	else
+		printf("Nothing dequeued\n");
 }
 
 static void read_input_value(int8_t *value) {

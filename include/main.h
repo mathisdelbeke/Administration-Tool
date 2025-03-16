@@ -19,6 +19,8 @@ static void delete_todo(TypeLinkedlist type_linkedlist);
 
 static void add_value_buffer();
 static void remove_value_buffer();
+static void enqueue_queue();
+static void dequeue_queue();
 
 static void read_input_value(int8_t *value);
 static void read_input_todo(char *todo);
