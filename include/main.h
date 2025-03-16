@@ -22,6 +22,9 @@ static void remove_value_buffer();
 static void enqueue_queue();
 static void dequeue_queue();
 
+static void add_hash_entry();
+static void del_hash_entry();
+
 static void read_input_value(int8_t *value);
 static void read_input_todo(char *todo);
 static bool is_todo_correct(char *todo);

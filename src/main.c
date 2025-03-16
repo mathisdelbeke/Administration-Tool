@@ -8,6 +8,7 @@
 #include "todo_dll.h"
 #include "ring_buffer.h"
 #include "queue.h"
+#include "hash_map.h"
 
 static const int MAX_CHARS = 250;
 
@@ -27,7 +28,7 @@ static void handle_sigint(int sig) {
 }
 
 static void show_menu() {
-	printf("1. Add ssl back\n2. Add ssl front\n3. Print ssl\n4. Delete ssl\n5. Add dll back\n6. Add dll front\n7. Print dll\n8. Delete dll\n+. Add to buffer\n-. Remove to buffer\n:. Print buffer\ne. Enqueue\nd. Dequeue\n;. Print queue\n");
+	printf("1. Add ssl back\n2. Add ssl front\n3. Print ssl\n4. Delete ssl\n5. Add dll back\n6. Add dll front\n7. Print dll\n8. Delete dll\n+. Add to buffer\n-. Remove to buffer\n:. Print buffer\ne. Enqueue\nd. Dequeue\n;. Print queue\n0. Add hash\n9. Del hash\n/. Print hashmap\n\n");
 	char selected_option = getchar();
 	if (selected_option == '\n') return;
 	while (getchar() != '\n');
@@ -45,6 +46,9 @@ static void show_menu() {
 	else if (selected_option == 'e') enqueue_queue();
 	else if (selected_option == 'd') dequeue_queue();
 	else if (selected_option == ';') print_queue();
+	else if (selected_option == '0') add_hash_entry();
+	else if (selected_option == '9') del_hash_entry();
+	else if (selected_option == '/') print_hashmap();
 }     
 
 static void add_todo(TypeLinkedlist type_linkedlist, InsertionPosition insert_position) {
@@ -101,6 +105,20 @@ static void dequeue_queue() {
 		printf("Sensor value fetched: %d\n", reading);
 	else
 		printf("Nothing dequeued\n");
+}
+
+static void add_hash_entry() {
+	int8_t key;
+	int8_t value;
+	read_input_value(&value);
+	read_input_value(&key);
+	insert_hash(key, value);
+}
+
+static void del_hash_entry() {
+	int8_t key;
+	read_input_value(&key);
+	delete_hash(key);
 }
 
 static void read_input_value(int8_t *value) {
